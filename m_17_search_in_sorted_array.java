@@ -1,5 +1,6 @@
 public class m_17_search_in_sorted_array {
     public static boolean staircasesearch(int matrix[][],int key){
+        // Time_complexity : O(row+col) or O(n+m)
         int row =0,col = matrix[0].length-1;
         while(row<matrix.length && col>=0){
             if(matrix[row][col]==key){
