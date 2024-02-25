@@ -5,6 +5,7 @@ public class m_50_oops_interface {
     // To achieve total abstraction..100% abstraction
     //all methods in interface are public and abstract and without implementation
     
+    
     public static void main(String args[]){  
         Drawable d=new Rectangle();  
         d.draw();  
