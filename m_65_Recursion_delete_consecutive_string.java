@@ -1,4 +1,4 @@
-public class m_65_Recursion_remove_duplicate_in_string {
+public class m_65_Recursion_delete_consecutive_string {
     
 
     public static String deleteConsecutiveStrings(String s)
@@ -45,6 +45,9 @@ public class m_65_Recursion_remove_duplicate_in_string {
         // Printing result
         System.out.println("Output : "
                         + deleteConsecutiveStrings(s));
+
+       
+
     }
     }
     
