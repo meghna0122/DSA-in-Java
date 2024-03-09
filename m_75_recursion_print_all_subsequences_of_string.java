@@ -29,7 +29,7 @@ return;
     }
 
     public static void main(String[] args) {
-        String str ="aaa";
+        String str ="abc";
         HashSet<String> set = new HashSet<>();
        String s ="";
         // PrintSubsequences(str,  s, 0);

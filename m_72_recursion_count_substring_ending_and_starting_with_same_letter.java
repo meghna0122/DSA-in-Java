@@ -17,7 +17,7 @@ public class m_72_recursion_count_substring_ending_and_starting_with_same_letter
         return res;
     }
     public static void main(String[] args) {
-        String str ="abcab";  //output: a,b,c,a,b,abca,bcab -->7
+        String str ="aba";  //output: a,b,c,a,b,abca,bcab -->7
         int n = str.length();
         System.out.println(countSubstr(str, 0, n-1, n));
       

@@ -11,7 +11,7 @@ public class m_67_recursion_friend_pairing {
 
     }
 public static void main(String[] args) {
-    System.out.println(friendPair(3));
+    System.out.println(friendPair(4));
 }
     
 } 

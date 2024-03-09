@@ -22,7 +22,6 @@ public class m_61_Recursion_firstOccurence_lastOccurence {
     }
     public static void main(String[] args) {
         int arr[]={1,3,3,3};
-       System.out.println( fo(arr,4,0));
        System.out.println( fo(arr,3,arr.length-1));
 
     }
