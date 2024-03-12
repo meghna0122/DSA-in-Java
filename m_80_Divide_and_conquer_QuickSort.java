@@ -8,32 +8,30 @@ if(start <end){
     }}
 
     public static int partition(int arr[],int start, int end){
-        int pivot=arr[start];
-        int temp , temp1;
-        int i=start+1;
-        int j= end;
-        while(i<=j){
-            if(pivot>arr[i]){
-i++;
-
-            }
-            if(pivot<arr[j]){
-                j--;
-            }
-
-            if(i<j & pivot<arr[i] & pivot>arr[j]){
-                temp1=arr[i];
-                arr[i]=arr[j];
-                arr[j]= temp1;
-            }
-
+        int pivot = arr[start];
+        int i=start;
+        int j = end;
+        while(i<j){   
+            while(arr[i]<=pivot &&i<=end-1 ){
+            i++;
         }
-      if(i>j) { temp=pivot;
-        arr[start] = arr[j];
-        arr[j]=temp;
-       }
-       return j;
+        while(arr[j]>pivot && j>=start+1){
+            j--;
+        }
+
+       if(i<j){ 
+        int temp = arr[i];
+        arr[i]=arr[j];
+        arr[j]=temp;}
         
+    }
+
+        int temp1 =arr[j];
+        arr[j]=arr[start];
+        arr[start]=temp1;
+        
+        
+           return j;
     }
 
     public static void printArray(int arr[]){
@@ -43,8 +41,9 @@ i++;
         System.out.println();
     }
     public static void main(String[] args) {
-        int arr[]={5,6,9,8,2,1};
-        quick(arr, 0, arr.length-1);
+        int arr[]={5,6,7};
+        int n = arr.length-1;
+        quick(arr, 0, n);
         printArray(arr);
 
     }
