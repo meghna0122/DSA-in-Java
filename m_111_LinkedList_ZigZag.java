@@ -1,68 +1,109 @@
+class Node {
+    int data;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+};
 public class m_111_LinkedList_ZigZag {
+   
 
-    static class Node {
-        int data;
-        Node next;
-    }
-
-    static Node head = null;
-    static int temp = 0;
-
-    static void zigZagList(Node head) {
-
-        boolean flag = true;
-        Node current = head;
-        while (current != null && current.next != null) {
-            if (flag == true) {
-                if (current.data > current.next.data) {
-                    temp = current.data;
-                    current.data = current.next.data;
-                    current.next.data = temp;
-                }
-            } else {
-                if (current.data < current.next.data) {
-                    temp = current.data;
-                    current.data = current.next.data;
-                    current.next.data = temp;
-                }
-            }
-
-            current = current.next;
-            flag = !(flag);
+	public static void AddElement(int data) {
+        Node newnode = new Node(data);
+        size++;
+        if (head == null) {
+            head = tail = newnode;
         }
+        tail.next = newnode;
+        tail = newnode;
     }
+	
+    public static Node head;
+	public static Node tail;
+	public static int size;
 
-    static void push(int new_data) {
+	public static Node getmid(Node head) {
+		Node slow = head;
+		Node fast = head.next;
+		while (fast != null && fast.next != null) {
+			slow = slow.next;
+			fast = fast.next.next;
 
-        Node new_Node = new Node();
+		}
+		return slow;
+	}
 
-        new_Node.data = new_data;
-        new_Node.next = (head);
-        (head) = new_Node;
-    }
+	public static void print(){
+		Node curr =head;
+		while (curr!=null) {
+			System.out.print(curr.data+" ");
+			curr=curr.next;
+			
+		}
 
-    static void printList(Node Node) {
-        while (Node != null) {
-            System.out.print(Node.data + "->");
-            Node = Node.next;
+	}
+
+
+    public static void zigzag(Node head){
+        //find mid
+        Node mid = getmid(head);
+
+        // right half
+        Node rightll = mid.next;
+        mid.next = null;
+
+        // reverse second half
+        Node currnode = rightll;
+        Node next ;
+        Node prev=null;
+
+        while (currnode!=null) {
+            next=currnode.next;
+            currnode.next=prev;
+            prev = currnode;
+            currnode=next;
+            
         }
-        System.out.println("NULL");
+
+        rightll=prev;
+
+        // alternate merge
+        Node nextL;
+        Node nextR;
+        Node curr1=head;
+        Node curr2= rightll;
+        while (curr1!=null && curr2!=null) {
+            nextL=curr1.next;
+            curr1.next=curr2;
+            nextR = curr2.next;
+            curr2.next=nextL;
+           curr1=nextL;
+           curr2=nextR;  
+        }
+
+        
+
+
+
     }
+	public static void main(String[] arguments) {
+		AddElement(3);
+		AddElement(1);
+	    AddElement(5);
+		AddElement(4);
+		print();
 
-    public static void main(String[] args) {
-        push(1);
-        push(2);
-        push(6);
-        push(8);
-        push(7);
-        push(3);
-        push(4);
+	    zigzag(head);
+		System.out.println();
+System.out.println("zigzag linked list");
+		print();
 
-        System.out.println("Given linked list ");
-        printList(head);
-        zigZagList(head);
 
-        System.out.println("Zig Zag Linked list ");
-        printList(head);
-    }
+		
+
+	}
+
+
 }

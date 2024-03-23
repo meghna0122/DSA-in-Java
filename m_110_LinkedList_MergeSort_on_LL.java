@@ -1,121 +1,120 @@
+import java.util.LinkedList;
 
-class Node
-{
+class Node {
 	int data;
 	Node next;
 
-	Node(int data, Node next) {
+	Node(int data) {
 		this.data = data;
-		this.next = next;
+		this.next = null;
 	}
 };
 
-class m_110_LinkedList_MergeSort_on_LL
-{
-	// Printing function
-	public static void printList(Node head)
-	{
-		Node ptr = head;
-		while (ptr != null)
-		{
-			System.out.print(ptr.data + " -> ");
-			ptr = ptr.next;
-		}
+class m_110_LinkedList_MergeSort_on_LL {
+	
 
-		System.out.println("null");
+	public void AddElement(int data) {
+        Node newnode = new Node(data);
+        size++;
+        if (head == null) {
+            head = tail = newnode;
+        }
+        tail.next = newnode;
+        tail = newnode;
+    }
+	
+    public static Node head;
+	public static Node tail;
+	public static int size;
+
+	public static Node getmid(Node head) {
+		Node slow = head;
+		Node fast = head.next;
+		while (fast != null && fast.next != null) {
+			slow = slow.next;
+			fast = fast.next.next;
+
+		}
+		return slow;
 	}
 
-    // merging two linked list
-	public static Node SortedMerge(Node lst1, Node lst2)
-	{
-		// Base cases
-		if (lst1 == null)
-			return lst2;
+	public static Node merge(Node left, Node right) {
+		Node mergell =new Node(-1);
+Node temp =mergell;
 
-		else if (lst2 == null)
-			return lst1;
-
-		Node result;
-
-		if (lst1.data <= lst2.data)
-		{
-			result = lst1;
-			result.next = SortedMerge(lst1.next, lst2);
-		}
-		else
-		{
-			result = lst2;
-			result.next = SortedMerge(lst1, lst2.next);
-		}
-
-		return result;
+while (left!=null && right!=null) {
+	
+if(left.data < right.data){
+	temp.next = left;
+	left=left.next;
+	temp=temp.next;
+	}else{
+		temp.next =right;
+		right=right.next;
+		temp=temp.next;
 	}
-
-    //splitting list into two halves
-	public static Node[] FrontBackSplit(Node ptr)
-	{
-		// base case
-		if (ptr == null || ptr.next == null) {
-			return new Node[]{ ptr, null } ;
-		}
-
-		Node backward = ptr;
-		Node forward = ptr.next;
-
-		// Forward moves twice and backward moves once
-		while (forward != null)
-		{
-			forward = forward.next;
-			if (forward != null)
-			{
-				backward = backward.next;
-				forward = forward.next;
-			}
-		}
-
-        // splitting the linked list
-		Node[] arr = new Node[]{ ptr, backward.next };
-		backward.next = null;
-
-		return arr;
-	}
-
-	// Sorting linked list using merge sort.
-	public static Node MergeSort(Node head)
-	{
-		// Base case
-		if (head == null || head.next == null) {
-			return head;
-		}
-       
-		Node[] arr = FrontBackSplit(head);
-		Node first_half = arr[0];
-		Node second_half = arr[1];
-
-
-		first_half = MergeSort(first_half);
-		second_half = MergeSort(second_half);
-
-		// merge the two sorted list into single list.
-		return SortedMerge(first_half, second_half);
-	}
-
-	// Driver Program
-	public static void main(String[] arguments)
-	{
-		int[] arr = { 54, 12, 2, 1, 15, 4, 10};
-
-		Node head = null;
-		for (int i=0; i < 7; i++) {
-			head = new Node (arr[i], head);
-		}
-		
-		printList(head);
-		head = MergeSort(head);
-		printList(head);
-	}
+	
+	
 }
 
+while (left!=null) {
+	temp.next = left;
+	left=left.next;
+	temp=temp.next;
+	
+}
+while (right!=null) {
+	temp.next=right;
+	right=right.next;
+	temp=temp.next;
+	
+}
+return mergell.next;
+
+	}
+
+	public Node mergesort(Node head) {
+		if (head.next == null || head == null) {
+			return head;
+		}
+
+		Node leftll = head;
+		Node mid = getmid(head);
+		Node rightll = mid.next;
+		mid.next = null;
+
+		Node left = mergesort(leftll);
+		Node right = mergesort(rightll);
+
+		return merge(left, right);
+
+	}
 
 
+	public void print(){
+		Node curr =head;
+		while (curr!=null) {
+			System.out.print(curr.data+" ");
+			curr=curr.next;
+			
+		}
 
+	}
+	public static void main(String[] arguments) {
+		m_110_LinkedList_MergeSort_on_LL l1 = new m_110_LinkedList_MergeSort_on_LL();
+		l1.AddElement(3);
+		l1.AddElement(1);
+		l1.AddElement(5);
+		l1.AddElement(4);
+		l1.print();
+
+		head=l1.mergesort(head);
+		System.out.println();
+System.out.println("sorted linked list");
+		l1.print();
+
+
+		
+
+	}
+}
