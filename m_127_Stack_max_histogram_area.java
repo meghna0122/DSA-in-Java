@@ -46,7 +46,7 @@ if(s.isEmpty()){
         for (int i = 0; i < arr.length; i++) {
             ht=arr[i];
             width= SmallestRight[i]  -SmallestLeft[i] -1;
-new_area= ht*width;
+new_area= ht*width;  
 if(new_area>area){
     area=new_area;
 }
@@ -59,7 +59,7 @@ if(new_area>area){
     }
 
     public static void main(String[] args) {
-        int arr[] = { 2, 6,2 };
+        int arr[] = { 7, 6,2 };
         int area=MaxHistogramArea(arr);
         System.out.println(area);
 
