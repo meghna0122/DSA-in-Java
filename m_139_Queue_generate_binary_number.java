@@ -7,9 +7,9 @@ public class m_139_Queue_generate_binary_number {
         Queue<String> q = new LinkedList<String>();
         q.add("1");
         while (n-- > 0) {
-            String s1 = q.peek();
+            String s1 = q.peek();       
             q.remove();
-            System.out.println(s1);
+            System.out.print(s1+"  ");
             String s2 = s1;
             q.add(s1 + "0");
             q.add(s2 + "1");
@@ -17,7 +17,7 @@ public class m_139_Queue_generate_binary_number {
     }
 
     public static void main(String[] args) {
-        int n = 10;
+        int n = 20;
         generatePrintBinary(n);
     }
 }
