@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class m_175_BST_Questions {
 
     static class Node {
@@ -36,7 +38,7 @@ public class m_175_BST_Questions {
         System.out.print(root.data + " ");
         inorder(root.right);
     }
-
+//SEARCH A KEY IN BST
     public static boolean Search(Node root, int key) {
         boolean x;
         if (root == null) {
@@ -53,7 +55,7 @@ public class m_175_BST_Questions {
         return x;
 
     }
-
+//DELETE A KEY FROM BST
     public static Node DeleteNode(Node root, int key) {
         if(root==null){
             return root;
@@ -98,7 +100,7 @@ public class m_175_BST_Questions {
            }
            return root;
     }
-
+//TO PRINT IN GIVEN RANGE
     public static void printInRange(Node root,int k1,int k2){
         if(root==null){
             return ;
@@ -119,17 +121,45 @@ printInRange(root.right, k1, k2);
 }
     }
 
-    public static void main(String[] args) {
-        int[] values = { 1,3,4,5,6,8,10,11,14 };
-        Node root = null;
-        for (int i = 0; i < values.length; i++) {
-            root = buildTree(root, values[i]);
+public static void print(ArrayList<Integer> list){
+    for (int i = 0; i < list.size(); i++) {
+        System.out.print(list.get(i)+"->");
+    }
+    System.out.println("Null");
+}
+    public static void RootToLeafPath(Node root,ArrayList<Integer> list){
+        if(root==null){
+            return;
         }
+        list.add(root.data);
+        if(root.left ==null && root.right ==null){
+            print(list);
+            
+        }else{
+        RootToLeafPath(root.left, list);
+        RootToLeafPath(root.right, list);
+        }
+        list.remove(list.size()-1);
+
+    }
+
+    public static void main(String[] args) {
+        // int[] values = { 1,3,4,5,6,8,10,11,14 };
+        // Node root = null;
+        // for (int i = 0; i < values.length; i++) {
+        //     root = buildTree(root, values[i]);
+        // }
+        Node root= new Node(5);
+        root.left = new Node(2);
+        root.left.left=new Node(1);
+        root.right=new Node(7);
 inorder(root);
 System.out.println();
-        // System.out.println(Search(root, 8));
+        // System.out.println(Search(root, 1));
         // root = DeleteNode(root, 3);
         // inorder(root);
-        printInRange(root, 10, 14);
+        // printInRange(root, 10, 14);
+        
+        RootToLeafPath(root,new ArrayList<>());
     }
 }
