@@ -143,6 +143,31 @@ public static void print(ArrayList<Integer> list){
 
     }
 
+    public static boolean ValidateBST(Node root,Node min,Node max){
+        if(root==null){
+            return true;
+        }
+        if(min !=null && root.data<=min.data){
+            return false;
+        }
+        if(max!=null && root.data>=max.data){
+            return false;
+        }
+
+        return ValidateBST(root.left, min, root)  && ValidateBST(root.right, root, max);
+    }
+
+    public static Node MirrorBST(Node root){
+        if(root ==null){
+            return null;
+        }
+        Node left = MirrorBST(root.left);
+        Node right = MirrorBST(root.right);
+        root.left = right;
+        root.right =left;
+        return root;
+    }
+
     public static void main(String[] args) {
         // int[] values = { 1,3,4,5,6,8,10,11,14 };
         // Node root = null;
@@ -152,6 +177,7 @@ public static void print(ArrayList<Integer> list){
         Node root= new Node(5);
         root.left = new Node(2);
         root.left.left=new Node(1);
+        root.left.right =new Node(8);
         root.right=new Node(7);
 inorder(root);
 System.out.println();
@@ -160,6 +186,11 @@ System.out.println();
         // inorder(root);
         // printInRange(root, 10, 14);
         
-        RootToLeafPath(root,new ArrayList<>());
+        // RootToLeafPath(root,new ArrayList<>());
+
+        // System.out.println(ValidateBST(root, null,null));
+        MirrorBST(root);
+        inorder(root);
+
     }
 }
