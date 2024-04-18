@@ -14,6 +14,14 @@ public class m_175_BST_Questions {
         }
     }
 
+    public static void preorder(Node root){
+        if(root==null){
+            return;
+        }
+        System.out.print(root.data+" ");
+        preorder(root.left);
+        preorder(root.right);
+    }
     public static Node buildTree(Node root, int val) {
         if (root == null) {
             root = new Node(val);
@@ -168,6 +176,50 @@ public static void print(ArrayList<Integer> list){
         return root;
     }
 
+    public static Node SortedArray_To_Balanced_BST(int[] arr,int low,int high){
+        //arr =[2,3,5,7,9,12,15]
+        if(low>high){
+            return null;
+        }
+        
+        int mid=(low+high)/2;
+       Node root = new Node(arr[mid]);
+      root.left= SortedArray_To_Balanced_BST(arr, low, mid-1);
+      root.right = SortedArray_To_Balanced_BST(arr, mid+1, high);
+      return root;
+       
+    }
+    public static void inorder_list(Node root,ArrayList<Integer> list){
+        if(root==null){
+            return;
+        }
+      
+        inorder_list(root.left,list);
+        list.add(root.data);
+        inorder_list(root.right, list);
+    }
+
+    public static Node balanced_bst_from_sorted_list(ArrayList<Integer> list,int low,int high){
+        if(low>high){
+            return null;
+        }
+int mid= (low+high)/2;
+
+Node root = new Node(list.get(mid));
+root.left = balanced_bst_from_sorted_list(list, low, mid-1);
+root.right=balanced_bst_from_sorted_list(list, mid+1, high);
+return root;
+
+    }
+    // BST to BALANCED BST
+    public static Node BalancedBST(Node root){
+        ArrayList<Integer> list = new ArrayList<>();
+        inorder_list(root, list);
+
+        root = balanced_bst_from_sorted_list(list,0,list.size()-1);
+        return root;
+    }
+
     public static void main(String[] args) {
         // int[] values = { 1,3,4,5,6,8,10,11,14 };
         // Node root = null;
@@ -177,10 +229,11 @@ public static void print(ArrayList<Integer> list){
         Node root= new Node(5);
         root.left = new Node(2);
         root.left.left=new Node(1);
-        root.left.right =new Node(8);
+        root.right.right =new Node(8);
         root.right=new Node(7);
-inorder(root);
-System.out.println();
+        
+// inorder(root);
+// System.out.println();
         // System.out.println(Search(root, 1));
         // root = DeleteNode(root, 3);
         // inorder(root);
@@ -189,8 +242,14 @@ System.out.println();
         // RootToLeafPath(root,new ArrayList<>());
 
         // System.out.println(ValidateBST(root, null,null));
-        MirrorBST(root);
-        inorder(root);
+        // MirrorBST(root);
+        // inorder(root);
+
+    // int[] arr={3,5,6,8,10,11,12};
+    // Node root1= SortedArray_To_Balanced_BST(arr, 0, arr.length-1);
+    // preorder(root1);
+    Node root1=BalancedBST(root);
+    preorder(root1);
 
     }
 }
